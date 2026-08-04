@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
 import { pricingOptions } from "../constants";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const Pricing = ({ billing = "monthly" }) => {
   const location = useLocation();
@@ -96,12 +96,12 @@ const Pricing = ({ billing = "monthly" }) => {
 
       {location.pathname !== "/pricing" && (
         <div className="mt-12 flex justify-center">
-          <a
-            href="/pricing"
+          <Link
+            to="/pricing"
             className="px-8 sm:px-10 py-3 sm:py-4 bg-[#F4400D] text-white rounded-full font-semibold shadow-md border border-transparent hover:bg-transparent hover:text-[#F4400D] hover:border-[#F4400D] transition-all duration-300"
           >
             View More
-          </a>
+          </Link>
         </div>
       )}
     </section>
