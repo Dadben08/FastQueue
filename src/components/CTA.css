@@ -1,0 +1,110 @@
+/* CTA Component Styles */
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.cta-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #2f2a76;
+  letter-spacing: -0.025em;
+}
+
+.cta-title span {
+  color: #4b5563;
+}
+
+.cta-description {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+  max-width: 42rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f61b10;
+  color: white;
+  font-weight: 800;
+  padding: 1rem 3rem;
+  font-size: 1.125rem;
+  border-radius: 9999px;
+  box-shadow: 0 25px 50px -12px rgba(248, 113, 113, 0.25);
+  transition: all 0.3s ease;
+  transform: scale(1);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #cc160d;
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(248, 113, 113, 0.4);
+}
+
+.cta-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cta-title {
+    font-size: 2.25rem;
+  }
+  
+  .cta-description {
+    font-size: 1.125rem;
+    padding: 0 1rem;
+  }
+  
+  .cta-button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-title {
+    font-size: 1.875rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
+  }
+  
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Animation for extra polish */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cta-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.cta-button {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}

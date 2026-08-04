@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+
+.blog-post-container {
+  min-height: 100vh;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-content {
+  position: relative;
+  z-index: 10;
+  padding: 3rem 1.5rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-post-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+@media (min-width: 640px) {
+  .blog-post-title {
+    font-size: 3rem;
+  }
+}
+
+.blog-post-accent {
+  color: #f61b10;
+}
+
+.blog-post-paragraph {
+  font-size: 1.125rem;
+  color: #374151;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  space-y: 0.75rem;
+  color: #374151;
+  line-height: 1.75;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-ordered-list {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  space-y: 0.75rem;
+  color: #374151;
+  line-height: 1.75;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-list-item {
+  margin-bottom: 0.75rem;
+}
+
+.blog-post-strong {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.blog-post-button-container {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.blog-post-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #f61b10;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.2s;
+  font-family: 'Julius Sans One', sans-serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.blog-post-button:hover {
+  background-color: #d9180e;
+}
+
+/* Animation Styles */
+@keyframes queue-flow-visible {
+  0% { transform: translatex(0); opacity: 0.1; }
+  5% { opacity: 0.2; }
+  95% { opacity: 0.2; }
+  100% { transform: translatex(-200vw); opacity: 0.1; }
+}
+
+.animation-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.animation-dot {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.15;
+}
+
+.animation-dot-red {
+  background-color: #f61b10;
+}
+
+.animation-dot-gray {
+  background-color: #f3f4f6;
+}

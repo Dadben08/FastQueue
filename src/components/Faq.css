@@ -1,0 +1,66 @@
+/* FAQ Container */
+.faq {
+  width: 100%;
+}
+
+/* Title */
+.faq_title {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2.5rem 0;
+  color: #2f2a76;
+  font-family: "Julius Sans One", sans-serif;
+}
+
+@media (min-width: 640px) {
+  .faq_title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .faq_title {
+    font-size: 3.75rem;
+  }
+}
+
+/* FAQ Box */
+.faq_box {
+  background-color: #fef0da;
+  border: 1px solid #f4400d;
+  border-radius: 1rem; /* 2xl rounded */
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.faq_box:hover {
+  transform: translateY(-5px);
+  background-image: linear-gradient(90deg, #f61b10, #ef0963);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Question */
+.faq_question {
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: "Julius Sans One", sans-serif;
+  margin-bottom: 0.5rem;
+  color: #2f2a76;
+}
+
+/* Answer */
+.faq_answer {
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  color: #2f2a76;
+  line-height: 1.5;
+}
+
+/* Ensure text turns white when hovered */
+.faq_box:hover .faq_question,
+.faq_box:hover .faq_answer {
+  color: #fff;
+}
