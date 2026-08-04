@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 
 function Hero() {
@@ -21,8 +22,7 @@ function Hero() {
   const organizationContent = (
     <div className="hero-inner">
       <h1 className="hero-headline">
-        Manage Queues Smarter{" "}
-        <span className="accent">Without Chaos</span>
+        Manage Queues Smarter <span className="accent">Without Chaos</span>
       </h1>
 
       <p className="hero-description">
@@ -32,12 +32,13 @@ function Hero() {
       </p>
 
       <div className="hero-buttons">
-        <a href="/login" className="btn primary">
+        <Link to="/login" className="btn primary">
           ORGANIZATION SIGN IN
-        </a>
-        <a href="/signup" className="btn secondary">
+        </Link>
+
+        <Link to="/signup" className="btn secondary">
           ORGANIZATION SIGN UP
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -45,8 +46,7 @@ function Hero() {
   const userContent = (
     <div className="hero-inner">
       <h1 className="hero-headline">
-        Ready to Queue?{" "}
-        <span className="accent">Find Your Line Now.</span>
+        Ready to Queue? <span className="accent">Find Your Line Now.</span>
       </h1>
 
       <p className="hero-description">
@@ -55,9 +55,9 @@ function Hero() {
       </p>
 
       <div className="hero-buttons">
-        <a href="/regdashboard" className="btn primary">
+        <Link to="/regdashboard" className="btn primary">
           JOIN A QUEUE
-        </a>
+        </Link>
       </div>
     </div>
   );
