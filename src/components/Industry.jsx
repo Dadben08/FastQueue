@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Building2,
   Hospital,
@@ -125,164 +125,110 @@ const benefits = [
 ];
 
 const Industry = () => {
+  const [queue, setQueue] = useState(0);
+  const [waitTime, setWaitTime] = useState(0);
+  const [served, setServed] = useState(0);
+
+  useEffect(() => {
+    const animateCounter = (setter, target, duration = 1500) => {
+      let start = 0;
+      const increment = target / (duration / 16);
+
+      const counter = setInterval(() => {
+        start += increment;
+
+        if (start >= target) {
+          setter(target);
+          clearInterval(counter);
+        } else {
+          setter(Math.floor(start));
+        }
+      }, 16);
+    };
+
+    animateCounter(setQueue, 23);
+    animateCounter(setWaitTime, 12);
+    animateCounter(setServed, 186);
+  }, []);
+
   return (
-    <div className="min-h-screen  text-white">
+    <div className="min-h-screen text-white">
       {/* HERO */}
-
       <section
-  className="
-    py-20
-    px-6
-    bg-cover
-    bg-center
-    relative
-    overflow-hidden
-    h-[650px]
-  "
-  style={{
-    backgroundImage: `url(${queueBg})`,
-  }}
->
-  {/* Background Overlay */}
-  <div
-    className="
-      absolute
-      inset-0
-      bg-[#1e1c1cc2]
-      opacity-80
-    "
-  ></div>
-
-
-  {/* Content */}
-  <div
-    className="
-      relative
-      z-10
-      max-w-7xl
-      mx-auto
-      grid
-      md:grid-cols-2
-      gap-10
-      items-center
-    "
-  >
-
-    <div>
-      <h1 className="text-5xl font-extrabold leading-tight font-raleway">
-  Smart queue management for every industry
-</h1>
-
-      <p className="mt-6 text-lg text-red-100">
-        Help your organization reduce waiting time, improve customer
-        satisfaction, and manage queues efficiently with our digital queue
-        platform.
-      </p>
-
-
-      <div className="mt-8 flex flex-wrap gap-4">
-
-        <Link
-          to="/signup"
-          className="
-            bg-[#F4400D]
-            text-white
-            px-6
-            py-3
-            rounded-full
-            font-semibold
-            flex
-            items-center
-            hover:bg-gray-100
-            hover:text-[#F4400D]
-            transition
-          "
-        >
-          Register your business
-          <ArrowRight size={18} className="ml-2" />
-        </Link>
-
-
-        <Link
-          to="/dashboard"
-          className="
-            border
-            border-white
-            px-6
-            py-3
-            rounded-full
-            font-semibold
-            hover:bg-white
-            hover:text-[#F4400D]
-            transition
-          "
-        >
-          View customer portal
-        </Link>
-
-      </div>
-    </div>
-
-
-
-    <div className="flex justify-center">
-
-      <div
-        className="
-          bg-white/20
-          backdrop-blur
-          rounded-3xl
-          p-8
-          w-full
-          max-w-md
-        "
+        className="py-20 px-6 bg-cover bg-center relative overflow-hidden h-[650px]"
+        style={{
+          backgroundImage: `url(${queueBg})`,
+        }}
       >
+        {/* Background Overlay */}
+        <div className="absolute inset-0 bg-[#1e1c1cc2] opacity-80"></div>
 
-        <div className="space-y-4">
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 className="text-5xl font-extrabold leading-tight font-raleway">
+              Smart queue management for every industry
+            </h1>
 
-          <div className="bg-white rounded-xl p-4 text-gray-800">
-            <p className="text-sm text-gray-500">
-              Current queue
+            <p className="mt-6 text-lg text-red-100">
+              Help your organization reduce waiting time, improve customer
+              satisfaction, and manage queues efficiently with our digital queue
+              platform.
             </p>
 
-            <h3 className="text-3xl font-bold text-[#F4400D]">
-              A023
-            </h3>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                to="/signup"
+                className="bg-[#F4400D] text-white px-6 py-3 rounded-full font-semibold flex items-center hover:bg-gray-100 hover:text-[#F4400D] transition"
+              >
+                Register your business
+                <ArrowRight size={18} className="ml-2" />
+              </Link>
+
+              <Link
+                to="/dashboard"
+                className="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#F4400D] transition"
+              >
+                View customer portal
+              </Link>
+            </div>
           </div>
 
+          <div className="flex justify-center">
+            <div className="bg-white/20 backdrop-blur rounded-3xl p-8 w-full max-w-md">
+              <div className="space-y-4">
+                <div className="bg-white rounded-xl p-4 text-gray-800">
+                  <p className="text-sm text-gray-500">Current queue</p>
 
-          <div className="bg-white rounded-xl p-4 text-gray-800">
-            <p className="text-sm text-gray-500">
-              Average wait time
-            </p>
+                  <h3 className="text-3xl font-bold text-[#F4400D]">
+                    A{queue.toString().padStart(3, "0")}
+                  </h3>
+                </div>
 
-            <h3 className="text-3xl font-bold">
-              12 mins
-            </h3>
+                <div className="bg-white rounded-xl p-4 text-gray-800">
+                  <p className="text-sm text-gray-500">
+                    Average wait time
+                  </p>
+
+                  <h3 className="text-3xl font-bold">
+                    {waitTime} mins
+                  </h3>
+                </div>
+
+                <div className="bg-white rounded-xl p-4 text-gray-800">
+                  <p className="text-sm text-gray-500">
+                    Customers served today
+                  </p>
+
+                  <h3 className="text-3xl font-bold">{served}</h3>
+                </div>
+              </div>
+            </div>
           </div>
-
-
-          <div className="bg-white rounded-xl p-4 text-gray-800">
-            <p className="text-sm text-gray-500">
-              Customers served today
-            </p>
-
-            <h3 className="text-3xl font-bold">
-              186
-            </h3>
-          </div>
-
-
         </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
+      </section>
+  
+  
 
       {/* INDUSTRIES */}
 
