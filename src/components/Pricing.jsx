@@ -46,20 +46,19 @@ const Pricing = ({ billing = "monthly" }) => {
                       {getPrice(option)}
                     </p>
 
-                    {option.title !== "Free" &&
-                      option.title !== "Enterprise" && (
-                        <div className="mt-2">
-                          <span className="text-base sm:text-lg text-gray-400">
-                            /{billing === "yearly" ? "year" : "month"}
-                          </span>
+                    {option.title !== "Free" && (
+                      <div className="mt-2">
+                        <span className="text-base sm:text-lg text-gray-400">
+                          /{billing === "yearly" ? "year" : "month"}
+                        </span>
 
-                          {billing === "yearly" && (
-                            <p className="text-sm text-green-600 font-medium mt-1">
-                              Save 2 months
-                            </p>
-                          )}
-                        </div>
-                      )}
+                        {billing === "yearly" && (
+                          <p className="text-sm text-green-600 font-medium mt-1">
+                            Save 2 months
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <ul className="space-y-4 text-left">
@@ -78,16 +77,15 @@ const Pricing = ({ billing = "monthly" }) => {
                   </ul>
                 </div>
 
-                <button className="relative overflow-hidden w-full mt-10 py-3 sm:py-4 px-6 text-base sm:text-lg font-semibold rounded-full border-2 bg-white text-[#2F2A76] transition-all duration-300 hover:scale-105 hover:shadow-xl group">
-                  <span className="absolute inset-0 bg-[#F4400D] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
+                <Link to={option.link} className="w-full">
+                  <button className="relative overflow-hidden w-full mt-10 py-3 sm:py-4 px-6 text-base sm:text-lg font-semibold rounded-full border-2 bg-white text-[#2F2A76] transition-all duration-300 hover:scale-105 hover:shadow-xl group">
+                    <span className="absolute inset-0 bg-[#F4400D] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
 
-                  <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
-                    {option.title === "Free" && "Start for Free"}
-                    {option.title === "Standard" && "Get Standard"}
-                    {option.title === "Pro" && "Get Pro"}
-                    {option.title === "Enterprise" && "Contact Sales"}
-                  </span>
-                </button>
+                    <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
+                      {option.buttonText}
+                    </span>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
