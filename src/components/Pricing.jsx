@@ -77,15 +77,22 @@ const Pricing = ({ billing = "monthly" }) => {
                   </ul>
                 </div>
 
-                <Link to={option.link} className="w-full">
-                  <button className="relative overflow-hidden w-full mt-10 py-3 sm:py-4 px-6 text-base sm:text-lg font-semibold rounded-full border-2 bg-white text-[#2F2A76] transition-all duration-300 hover:scale-105 hover:shadow-xl group">
-                    <span className="absolute inset-0 bg-[#F4400D] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
+                <Link
+  to="/payment"
+  state={{
+    plan: option.title,
+    billing,
+  }}
+  className="w-full"
+>
+  <button className="relative overflow-hidden w-full mt-10 py-3 sm:py-4 px-6 text-base sm:text-lg font-semibold rounded-full border-2 bg-white text-[#2F2A76] transition-all duration-300 hover:scale-105 hover:shadow-xl group">
+    <span className="absolute inset-0 bg-[#F4400D] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
 
-                    <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
-                      {option.buttonText}
-                    </span>
-                  </button>
-                </Link>
+    <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
+      {option.buttonText}
+    </span>
+  </button>
+</Link>
               </div>
             </div>
           </div>

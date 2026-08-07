@@ -138,7 +138,7 @@ export const pricingOptions = [
     title: "Free",
     price: "₦0",
     buttonText: "Start for Free",
-    link: "/signup",
+    link: "/payment",
     features: [
       "Up to 50 tickets/day",
       "Basic queue management",
@@ -150,7 +150,7 @@ export const pricingOptions = [
     title: "Standard",
     price: "₦29",
     buttonText: "Get Standard",
-    link: "/signup",
+    link: "/payment",
     features: [
       "Unlimited digital tickets",
       "Real-time notifications",
@@ -162,7 +162,7 @@ export const pricingOptions = [
     title: "Pro",
     price: "₦99",
     buttonText: "Get Pro",
-    link: "/signup",
+    link: "/payment",
     features: [
       "Advanced analytics & reporting",
       "Multi-branch support",

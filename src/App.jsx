@@ -38,7 +38,7 @@ import Government from './components/Government';
 import Warehouse from './components/Warehouse';
 import Hotel from './components/Hotel';
 import Barber from './components/Barber';
-
+import PaymentPage from './components/PaymentPage';
 // ---------------- HOME PAGE ----------------
 const HomePage = () => {
 const location = useLocation();
@@ -116,6 +116,7 @@ const LayoutWrapper = ({ children }) => (
 return ( <Router> <ScrollToTop /> <Routes>
 <Route path='/signup' element={<AuthPage />} />
 <Route path='/login' element={<AuthPage />} />
+<Route path='/payment' element={<PaymentPage />} />
 <Route path='/dashboard' element={<DashboardPage />} />
 
     <Route path='/industry' element={<Industry />} />
