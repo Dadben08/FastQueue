@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock, MapPin, Video } from "lucide-react";
+import { Clock, Building2, Bell, Ticket } from "lucide-react";
 import { useDashboard } from "../../context/dashboardContext";
 
 const SettingsSection = () => {
@@ -7,100 +7,163 @@ const SettingsSection = () => {
 
   return (
     <div className="space-y-6">
-      {/* Organization Info */}
-      <div className="p-6 bg-white rounded-2xl shadow">
-        <h2 className="text-2xl font-semibold mb-4 text-[#2f2a76]">
-          Organization Information
-        </h2>
-        <div className="grid grid-cols-2 gap-4">
+      {/* Organization Information */}
+      <div className="p-6 bg-white rounded-2xl shadow-sm">
+        <div className="flex items-center gap-3 mb-6">
+          <Building2 className="text-[#F4400D]" size={24} />
+          <h2 className="text-2xl font-semibold text-[#2F2A76]">
+            Organization information
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p className="text-sm text-gray-600">Name</p>
-            <p className="font-semibold">{orgData?.orgName || "N/A"}</p>
+            <p className="text-sm text-gray-500 mb-1">Organization name</p>
+            <p className="font-semibold text-gray-800">
+              {orgData?.orgName || "Access Bank Ikeja"}
+            </p>
           </div>
+
           <div>
-            <p className="text-sm text-gray-600">Email</p>
-            <p className="font-semibold">{orgData?.orgEmail || "N/A"}</p>
+            <p className="text-sm text-gray-500 mb-1">Email address</p>
+            <p className="font-semibold text-gray-800">
+              {orgData?.orgEmail || "info@organization.com"}
+            </p>
           </div>
+
           <div>
-            <p className="text-sm text-gray-600">Address</p>
-            <p className="font-semibold">{orgData?.orgAddress || "N/A"}</p>
+            <p className="text-sm text-gray-500 mb-1">Branch address</p>
+            <p className="font-semibold text-gray-800">
+              {orgData?.orgAddress || "Ikeja, Lagos"}
+            </p>
           </div>
+
           <div>
-            <p className="text-sm text-gray-600">Category</p>
-            <p className="font-semibold">{orgData?.category || "N/A"}</p>
+            <p className="text-sm text-gray-500 mb-1">Industry</p>
+            <p className="font-semibold text-gray-800">
+              {orgData?.category || "Banking"}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Business Days */}
-      <div className="p-6 bg-white rounded-2xl shadow">
-        <h2 className="text-2xl font-semibold mb-4 text-[#2f2a76]">
-          Business Hours
-        </h2>
+      {/* Queue Settings */}
+      <div className="p-6 bg-white rounded-2xl shadow-sm">
+        <div className="flex items-center gap-3 mb-6">
+          <Ticket className="text-[#F4400D]" size={24} />
+          <h2 className="text-2xl font-semibold text-[#2F2A76]">
+            Queue settings
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm text-gray-500 mb-2">
+              Ticket prefix
+            </label>
+            <input
+              type="text"
+              defaultValue="A"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#F4400D]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-500 mb-2">
+              Maximum daily tickets
+            </label>
+            <input
+              type="number"
+              defaultValue={500}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#F4400D]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-500 mb-2">
+              Average service time (minutes)
+            </label>
+            <input
+              type="number"
+              defaultValue={10}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#F4400D]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-500 mb-2">
+              Queue reset time
+            </label>
+            <input
+              type="time"
+              defaultValue="08:00"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#F4400D]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Business Hours */}
+      <div className="p-6 bg-white rounded-2xl shadow-sm">
+        <div className="flex items-center gap-3 mb-6">
+          <Clock className="text-[#F4400D]" size={24} />
+          <h2 className="text-2xl font-semibold text-[#2F2A76]">
+            Operating hours
+          </h2>
+        </div>
+
         <div className="space-y-3">
-          {orgData?.businessDays?.map((day) => (
-            <div
-              key={day._id}
-              className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-            >
-              <div className="flex items-center gap-3">
-                <Clock size={20} className="text-[#2f2a76]" />
-                <span className="font-semibold">{day.day}</span>
-              </div>
-              <div className="text-sm">
-                {day.isOpen ? (
-                  <span className="text-green-600 font-medium">
-                    {day.openTime} - {day.closeTime}
-                  </span>
-                ) : (
-                  <span className="text-red-600 font-medium">Closed</span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Services */}
-      <div className="p-6 bg-white rounded-2xl shadow">
-        <h2 className="text-2xl font-semibold mb-4 text-[#2f2a76]">Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {orgData?.services?.map((service) => (
-            <div
-              key={service._id}
-              className="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 transition-colors"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-lg">{service.name}</h3>
-                <span
-                  className={`px-2 py-1 text-xs rounded-full ${
-                    service.type === "virtual"
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-green-100 text-green-700"
-                  }`}
-                >
-                  {service.type === "virtual" ? (
-                    <Video size={12} className="inline mr-1" />
-                  ) : (
-                    <MapPin size={12} className="inline mr-1" />
-                  )}
-                  {service.type}
+          {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(
+            (day) => (
+              <div
+                key={day}
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-xl"
+              >
+                <span className="font-medium text-gray-800">{day}</span>
+                <span className="text-green-600 font-medium">
+                  8:00 AM - 5:00 PM
                 </span>
               </div>
-              <p className="text-sm text-gray-600 mb-2">
-                Duration: {service.duration} minutes
-              </p>
-              {service.description && (
-                <p className="text-sm text-gray-500">{service.description}</p>
-              )}
-              {service.type === "virtual" && service.link && (
-                <p className="text-xs text-blue-600 break-all mt-2">
-                  {service.link}
-                </p>
-              )}
-            </div>
-          ))}
+            )
+          )}
         </div>
+      </div>
+
+      {/* Notification Settings */}
+      <div className="p-6 bg-white rounded-2xl shadow-sm">
+        <div className="flex items-center gap-3 mb-6">
+          <Bell className="text-[#F4400D]" size={24} />
+          <h2 className="text-2xl font-semibold text-[#2F2A76]">
+            Notification preferences
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          <label className="flex items-center justify-between p-4 border border-gray-200 rounded-xl cursor-pointer">
+            <span className="font-medium text-gray-800">
+              Email notifications
+            </span>
+            <input type="checkbox" defaultChecked className="w-5 h-5" />
+          </label>
+
+          <label className="flex items-center justify-between p-4 border border-gray-200 rounded-xl cursor-pointer">
+            <span className="font-medium text-gray-800">
+              SMS notifications
+            </span>
+            <input type="checkbox" className="w-5 h-5" />
+          </label>
+
+          <label className="flex items-center justify-between p-4 border border-gray-200 rounded-xl cursor-pointer">
+            <span className="font-medium text-gray-800">
+              WhatsApp notifications
+            </span>
+            <input type="checkbox" defaultChecked className="w-5 h-5" />
+          </label>
+        </div>
+
+        <button className="mt-6 px-6 py-3 bg-[#F4400D] text-white rounded-xl font-semibold hover:bg-[#d93608] transition-colors">
+          Save settings
+        </button>
       </div>
     </div>
   );

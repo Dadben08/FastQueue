@@ -1,31 +1,83 @@
-// import axiosInstance from "../config/axiosinstance.js";
-
-// const serviceService = {
-//   createService: (data) => axiosInstance.post("/api/service", data),
-//   updateService: (id, data) => axiosInstance.put(`/api/service/${id}`, data),
-// };
-
-// export default serviceService;
-
 import axiosInstance from "../config/axiosinstance.js";
 
 const serviceService = {
   // Get all services for the logged-in organization
-  getServices: () => axiosInstance.get("/api/service"),
+  getServices: async () => {
+    try {
+      const response = await axiosInstance.get("/api/service");
+      return response.data;
+    } catch (error) {
+      // Demo data while backend is not ready
+      return {
+        services: [
+          {
+            _id: "1",
+            name: "Account Opening",
+            duration: 15,
+            prefix: "A",
+          },
+          {
+            _id: "2",
+            name: "Cash Deposit",
+            duration: 5,
+            prefix: "D",
+          },
+          {
+            _id: "3",
+            name: "Customer Support",
+            duration: 10,
+            prefix: "C",
+          },
+        ],
+      };
+    }
+  },
 
-  // Create a new service
-  createService: (data) => axiosInstance.post("/api/service", data),
+  // Get a single service
+  getService: async (serviceId) => {
+    const response = await axiosInstance.get(`/api/service/${serviceId}`);
+    return response.data;
+  },
 
-  // Update a service
-  updateService: (serviceId, data) =>
-    axiosInstance.put(`/api/service/${serviceId}`, data),
+  // Create a new queue service
+  createService: async (data) => {
+    const response = await axiosInstance.post("/api/service", data);
+    return response.data;
+  },
 
-  // Delete a service
-  deleteService: (serviceId) =>
-    axiosInstance.delete(`/api/service/${serviceId}`),
+  // Update a queue service
+  updateService: async (serviceId, data) => {
+    const response = await axiosInstance.put(
+      `/api/service/${serviceId}`,
+      data
+    );
+    return response.data;
+  },
 
-  // Get single service
-  getService: (serviceId) => axiosInstance.get(`/api/service/${serviceId}`),
+  // Delete a queue service
+  deleteService: async (serviceId) => {
+    const response = await axiosInstance.delete(
+      `/api/service/${serviceId}`
+    );
+    return response.data;
+  },
+
+  // Generate a queue ticket for a service
+  generateTicket: async (serviceId) => {
+    try {
+      const response = await axiosInstance.post(
+        `/api/service/${serviceId}/ticket`
+      );
+      return response.data;
+    } catch (error) {
+      // Demo ticket generation
+      return {
+        ticket: "A025",
+        service: "Account Opening",
+        estimatedWait: 12,
+      };
+    }
+  },
 };
 
 export default serviceService;
