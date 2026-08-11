@@ -396,7 +396,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
             <div className="mt-6 text-center text-sm text-gray-500">
               Already have an account?{" "}
               <Link
-                to="/signin"
+                to="/login"
                 className="font-semibold text-[#2f2a76] hover:text-[#f4400d] transition-colors"
               >
                 Log in

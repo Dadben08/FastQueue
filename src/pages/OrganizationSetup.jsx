@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import OperatingHoursStep from "../components/OperatingHoursStep";
@@ -44,6 +44,50 @@ const OrganizationSetup = () => {
   const [editingService, setEditingService] = useState(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  // Load existing setup
+  useEffect(() => {
+    const loadSetup = async () => {
+      try {
+        const { data } = await axiosInstance.get("/api/users/profile");
+
+        if (data.user?.businessDays?.length) {
+          const dayMap = {
+            Monday: "monday",
+            Tuesday: "tuesday",
+            Wednesday: "wednesday",
+            Thursday: "thursday",
+            Friday: "friday",
+            Saturday: "saturday",
+            Sunday: "sunday",
+          };
+
+          const selected = {};
+          const custom = {};
+
+          data.user.businessDays.forEach((d) => {
+            const key = dayMap[d.day];
+            selected[key] = d.isOpen;
+            custom[key] = {
+              open: d.openTime || "08:00",
+              close: d.closeTime || "17:00",
+            };
+          });
+
+          setSelectedDays((prev) => ({ ...prev, ...selected }));
+          setCustomHours((prev) => ({ ...prev, ...custom }));
+        }
+
+        if (data.user?.services?.length) {
+          setServices(data.user.services);
+        }
+      } catch (err) {
+        console.error("Failed to load setup", err);
+      }
+    };
+
+    loadSetup();
+  }, []);
+
   const handleSave = async () => {
     try {
       setLoading(true);
@@ -59,49 +103,38 @@ const OrganizationSetup = () => {
         sunday: "Sunday",
       };
 
-      // Prepare businessDays payload
       const businessDaysPayload = Object.entries(selectedDays).map(
         ([day, isOpen]) => ({
           day: daysMap[day],
           isOpen,
-          openTime: useCustomHours
-            ? customHours[day].open
-            : isOpen
-            ? openTime
-            : "08:00",
-          closeTime: useCustomHours
-            ? customHours[day].close
-            : isOpen
-            ? closeTime
-            : "17:00",
+          openTime: isOpen
+            ? useCustomHours
+              ? customHours[day].open
+              : openTime
+            : null,
+          closeTime: isOpen
+            ? useCustomHours
+              ? customHours[day].close
+              : closeTime
+            : null,
         })
       );
 
-      // Prepare services payload
       const servicesPayload = services.map((service) => ({
-        name: service.name,
-        duration: service.duration,
-        description: service.description || "",
+        name: service.name.trim(),
+        duration: Number(service.duration),
+        description: service.description?.trim() || "",
         type: service.type,
-        link: service.type === "virtual" ? service.link : null,
+        link: service.type === "virtual" ? service.link : undefined,
       }));
 
-      console.log("Submitting setup:", {
-        businessDays: businessDaysPayload,
-        services: servicesPayload,
-      });
-
-      // Single request to save everything using the correct endpoint
-      const response = await axiosInstance.put("/api/users/setup", {
+      await axiosInstance.put("/api/users/setup", {
         services: servicesPayload,
         businessDays: businessDaysPayload,
+        setupCompleted: true,
       });
 
-      console.log("Setup saved successfully:", response.data);
-
-      // Mark setup as complete
       localStorage.setItem("setupCompleted", "true");
-
       setShowSuccessModal(true);
     } catch (err) {
       console.error("Setup error:", err);
@@ -111,12 +144,24 @@ const OrganizationSetup = () => {
     }
   };
 
+  const handleServicesNext = () => {
+    if (services.length === 0) {
+      setError("Please add at least one service before continuing.");
+      return;
+    }
+
+    setError("");
+    setCurrentStep(3);
+  };
+
   const handleConfirmAndNavigate = () => {
     setShowSuccessModal(false);
     navigate("/dashboard");
   };
 
-  const handleSkip = () => navigate("/dashboard");
+  const handleSkip = () => {
+    if (!loading) navigate("/dashboard");
+  };
 
   const steps = [
     { number: 1, title: "Operating Hours" },
@@ -125,42 +170,33 @@ const OrganizationSetup = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fef0da] py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-8">
-          <div className="flex-1" />
-          <div className="flex-1 text-center">
-            <img
-              src={fastqueueImage}
-              alt="FastQueue Logo"
-              className="mx-auto w-15 h-15 mb-3"
-            />
-            <h1 className="text-4xl font-bold text-[#2f2a76] mb-3">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-[#2f2a76]">
               FastQueue Setup
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mt-2">
               Let's get your organization ready to accept bookings
             </p>
           </div>
-          <div className="flex-1 flex justify-end">
-            <button
-              onClick={handleSkip}
-              className="px-6 py-2 text-sm border rounded-full hover:border-[#2f2a76]"
-            >
-              Skip and do later
-            </button>
-          </div>
+
+          <button
+            onClick={handleSkip}
+            disabled={loading}
+            className="text-gray-500 hover:text-[#2f2a76] disabled:opacity-50"
+          >
+            Skip and do later
+          </button>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
             {error}
           </div>
         )}
 
-        {/* Progress */}
         <div className="mb-12 flex justify-center gap-4">
           {steps.map((step, index) => (
             <React.Fragment key={step.number}>
@@ -172,22 +208,24 @@ const OrganizationSetup = () => {
                       : "bg-gray-200 text-gray-500"
                   }`}
                 >
-                  {currentStep > step.number ? (
-                    <Check size={20} />
-                  ) : (
-                    step.number
-                  )}
+                  {currentStep > step.number ? <Check size={20} /> : step.number}
                 </div>
                 <p className="text-sm mt-2">{step.title}</p>
               </div>
+
               {index < steps.length - 1 && (
-                <div className="h-1 w-24 bg-gray-200 mt-6" />
+                <div
+                  className={`h-1 w-24 mt-6 ${
+                    currentStep > step.number
+                      ? "bg-[#2f2a76]"
+                      : "bg-gray-200"
+                  }`}
+                />
               )}
             </React.Fragment>
           ))}
         </div>
 
-        {/* Steps */}
         {currentStep === 1 && (
           <OperatingHoursStep
             selectedDays={selectedDays}
@@ -212,7 +250,7 @@ const OrganizationSetup = () => {
             setShowServiceModal={setShowServiceModal}
             editingService={editingService}
             setEditingService={setEditingService}
-            onNext={() => setCurrentStep(3)}
+            onNext={handleServicesNext}
             onBack={() => setCurrentStep(1)}
           />
         )}
