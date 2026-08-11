@@ -63,13 +63,7 @@ const Features = () => {
                 </p>
               </div>
 
-              {/* Learn more */}
-              <div className="relative mt-6">
-                <span className="text-[#f4400d] font-medium text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
-                  Learn more
-                  <span>→</span>
-                </span>
-              </div>
+              
             </div>
           ))}
         </div>
