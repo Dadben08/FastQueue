@@ -17,6 +17,9 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import ScrollToTop from "./components/ScrollToTop";
+import CompanyRegistration from "./components/CompanyRegistration";
+import VerifyEmail from "./components/VerifyEmail";
+import RegistrationSuccess from "./components/RegistrationSuccess";
 
 import FeaturesPage from "./pages/FeaturesPage";
 import PricingPage from "./pages/PricingPage";
@@ -132,7 +135,9 @@ function App() {
         <Route path="/warehouses" element={<Warehouse />} />
         <Route path="/hotels" element={<Hotel />} />
         <Route path="/barber" element={<Barber />} />
-
+        <Route path="/company-registration" element={<CompanyRegistration />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/registration-success" element={<RegistrationSuccess />} />
         <Route
           path="/setup"
           element={

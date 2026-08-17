@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import SignUpModal from "../components/SignUpModal";
+import React, { useEffect, useState } from "react";
 import LoginModal from "../components/LoginModal";
+import CompanyRegistration from "../components/CompanyRegistration";
 import { useNavigate, useLocation } from "react-router-dom";
 import heroBg from "../assets/img/fastqueue.png";
 
@@ -9,13 +9,11 @@ const AuthPage = () => {
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  // Close modal handler
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate("/"); // send user back home
+    navigate("/");
   };
 
-  // Detect route change (when going between /signup and /login)
   useEffect(() => {
     setIsModalOpen(true);
   }, [location.pathname]);
@@ -28,10 +26,17 @@ const AuthPage = () => {
       }}
     >
       {location.pathname === "/signup" && (
-        <SignUpModal isOpen={isModalOpen} onClose={handleCloseModal} />
+        <CompanyRegistration
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
       )}
+
       {location.pathname === "/login" && (
-        <LoginModal isOpen={isModalOpen} onClose={handleCloseModal} />
+        <LoginModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );

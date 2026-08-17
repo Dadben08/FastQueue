@@ -136,7 +136,8 @@ export const howItWorksItems = [
 export const pricingOptions = [
   {
     title: "Free",
-    price: "₦0",
+    monthlyPrice: "₦0",
+    yearlyPrice: "₦0",
     buttonText: "Start for Free",
     link: "/payment",
     features: [
@@ -148,7 +149,8 @@ export const pricingOptions = [
   },
   {
     title: "Standard",
-    price: "₦29",
+    monthlyPrice: "₦10,000",
+    yearlyPrice: "₦100,000",
     buttonText: "Get Standard",
     link: "/payment",
     features: [
@@ -160,7 +162,8 @@ export const pricingOptions = [
   },
   {
     title: "Pro",
-    price: "₦99",
+    monthlyPrice: "₦25,000",
+    yearlyPrice: "₦250,000",
     buttonText: "Get Pro",
     link: "/payment",
     features: [

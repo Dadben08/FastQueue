@@ -212,7 +212,7 @@ return ( <div className='navbar' id='Navbar'> <nav className='header fixed top-0
           </RouterLink>
 
           <RouterLink
-            to='/signup'
+            to='/company-registration'
             onClick={() => setMobileDrawerOpen(false)}
             className='text-center py-3 bg-[#F4400D] text-white rounded-full'
           >
