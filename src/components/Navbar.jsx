@@ -110,10 +110,10 @@ return ( <div className='navbar' id='Navbar'> <nav className='header fixed top-0
         </RouterLink>
 
         <RouterLink
-          to='/signup'
+          to='/regdashboard'
           className='px-10 py-4 bg-[#F4400D] text-white rounded-full font-semibold hover:bg-transparent hover:text-[#F4400D] hover:border-[#F4400D] border'
         >
-          Sign Up
+          Join Queue
         </RouterLink>
       </div>
 

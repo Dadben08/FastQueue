@@ -67,7 +67,7 @@ function Hero() {
       <div className="hero-bg" />
 
       <div className={`hero-wrapper ${animating ? "fade-out" : "fade-in"}`}>
-        {isOrgView ? organizationContent : userContent}
+        {isOrgView ? userContent : organizationContent}
       </div>
     </section>
   );
