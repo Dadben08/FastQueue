@@ -284,7 +284,7 @@ const LoginModal = ({ isOpen, onClose }) => {
             onClick={onClose}
             className="font-semibold text-[#2f2a76] transition hover:text-[#f4400d]"
           >
-            Create one
+            Sign Up
           </Link>
         </div>
       </div>
